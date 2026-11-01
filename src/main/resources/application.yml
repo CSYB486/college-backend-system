@@ -1,0 +1,43 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: student-manage
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/student_manage?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: "123456"
+  jackson:
+    time-zone: Asia/Shanghai
+
+mybatis-plus:
+  configuration:
+    # 数据库下划线字段自动映射为驼峰属性，如 student_no -> studentNo
+    map-underscore-to-camel-case: true
+    # 开发阶段打印 SQL，方便调试；上线可改成 NoLoggingImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      # 主键使用数据库自增
+      id-type: auto
+
+# 自定义 JWT 配置
+jwt:
+  # 签名密钥，长度至少 32 个字符
+  secret: student-manage-secret-key-please-change-in-production
+  # 过期时间：24 小时（毫秒）
+  expire: 86400000
+
+# 接口文档地址：http://localhost:8090/swagger-ui.html
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    com.example.studentmanage: info
